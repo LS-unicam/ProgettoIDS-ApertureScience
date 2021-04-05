@@ -1,0 +1,12 @@
+package vendita;
+
+public enum CategorieProdotti {
+	ALIMENTARI,
+	CURA_PERSONALE,
+	PULIZIE,
+	ELETTRODOMESTICI,
+	ELETTRONICA,
+	CANCELLERIA,
+	VESTIARIO,
+	LIBRI
+}
