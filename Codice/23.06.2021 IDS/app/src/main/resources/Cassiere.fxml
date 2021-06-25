@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerCassiere">
+   <children>
+      <Label layoutX="30.0" layoutY="15.0" text="Cassiere" textFill="#0eb944" />
+      <Button layoutX="470.0" layoutY="360.0" mnemonicParsing="false" text="Menu Principale" />
+   </children>
+</AnchorPane>
