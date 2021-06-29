@@ -4,12 +4,12 @@ import java.util.Objects;
 public class Prodotti implements Prodotto {
     private String id;
     private String nome;
-    private float prezzo;
+    private double prezzo;
     private CategorieProdotti categoria;
-    private float volume;
+    private double volume;
 
     // costruttore------------------------------------------------------------------------------------------
-    public Prodotti(String id, String nome, float prezzo, CategorieProdotti categoria, float volume) {
+    public Prodotti(String id, String nome, double prezzo, CategorieProdotti categoria,double volume) {
         this.id = id;
         this.nome = nome;
         this.prezzo = prezzo;
@@ -42,11 +42,13 @@ public class Prodotti implements Prodotto {
 
     public void setNome(String nome) { this.nome = nome; }
 
-    public float getPrezzo() { return prezzo; }
+    public double getPrezzo() { return prezzo; }
 
-    public void setPrezzo(float prezzo) { this.prezzo = prezzo; }
+    public void setPrezzo(double prezzo) { this.prezzo = prezzo; }
 
-    public float getVolume() { return volume; }
+    public double getVolume() { return volume; }
+
+    public void setVolume(double volume) { this.volume = volume; }
 
     public CategorieProdotti getCategoria() { return categoria; }
 

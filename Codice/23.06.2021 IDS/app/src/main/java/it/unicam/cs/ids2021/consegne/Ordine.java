@@ -6,6 +6,7 @@ public interface Ordine {
     public String getIdOrdine();
     public Map<Prodotto, Integer> getMapProdotti();
     public void setIdOrdine(String idOrdine);
-    public float volumeOrdine();
-
+    public double volumeOrdine();
+    public boolean containsProdotto(Prodotto p);
+    public void aggiungiProdotto(Prodotto p, int quantita);
 }

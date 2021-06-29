@@ -14,22 +14,6 @@ public class Pacchi implements Pacco {
         this.dimensione = dimensione;
     }
 
-/*
-    public Pacchi (ArrayList <Prodotti> listaProdotti, String negozioPartenza, String lockerDestinazione, StatoPacco stato, Dimensione dimensione) {
-        idPacco++;
-        this.listaProdotti = listaProdotti;
-        this.negozioPartenza = negozioPartenza;
-        this.lockerDestinazione = lockerDestinazione;
-        this.stato = stato;
-        this.dimensione = dimensione; }
-
-    public ArrayList<Prodotti> getListaProdotti() {
-        return listaProdotti;
-    }
-    public void setListaProdotti(ArrayList<Prodotti> listaProdotti) {
-        this.listaProdotti = listaProdotti;
-    }*/
-
     public int getIdPacco() {
         return id;
     }

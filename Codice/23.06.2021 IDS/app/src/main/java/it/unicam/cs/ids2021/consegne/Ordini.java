@@ -9,16 +9,17 @@ import java.util.Set;
 
 public class Ordini implements Ordine {
     private String idOrdine;
-    private Map<Prodotto,Integer> mapProdotti;//map<Prodotti, quantita>
+    private Map<Prodotto, Integer> mapProdotti;//map<Prodotti, quantita>
     private LocalDate data;
     private Set<Pacco> setPacchi; // set
 
     // Costruttore---------------------------------------------------------
-    public Ordini (Map<Prodotto,Integer> mapProdotti) {
-        this.mapProdotti = Ordini.this.mapProdotti;
+    public Ordini(Map<Prodotto, Integer> mapProdotti) {
+        this.mapProdotti = mapProdotti;
         this.data = LocalDate.now();
-        this.setPacchi=null;
-        this.idOrdine=null; }
+        this.setPacchi = null;
+        this.idOrdine = null;
+    }
 
     //equals & hashcode----------------------------------------------------
     @Override
@@ -30,46 +31,73 @@ public class Ordini implements Ordine {
     }
 
     @Override
-    public int hashCode() { return Objects.hash(idOrdine); }
+    public int hashCode() {
+        return Objects.hash(idOrdine);
+    }
 
     //Getters & Setters-----------------------------------------------------
     @Override
-    public String getIdOrdine() { return idOrdine; }
+    public String getIdOrdine() {
+        return idOrdine;
+    }
 
     @Override
-    public void setIdOrdine(String idOrdine){this.idOrdine=idOrdine; }
+    public void setIdOrdine(String idOrdine) {
+        this.idOrdine = idOrdine;
+    }
 
     @Override
-    public Map<Prodotto,Integer> getMapProdotti() { return mapProdotti; }
+    public Map<Prodotto, Integer> getMapProdotti() {
+        return mapProdotti;
+    }
 
-    public Set<Pacco> getSetPacchi() { return setPacchi; }
+    public Set<Pacco> getSetPacchi() {
+        return setPacchi;
+    }
 
-    public LocalDate getData() { return data; }
+    public LocalDate getData() {
+        return data;
+    }
 
     //Altri metodi---------------------------------------------------------
-    public float  volumeOrdine() {
-        float count=0;
-        for(Map.Entry<Prodotto, Integer> coppia: this.getMapProdotti().entrySet())
-            count+=coppia.getKey().getVolume()* coppia.getValue();
-        return count;
+
+    /**
+     * Il metodo volume Ordine Calcola il volume dei prodotti dell'ordine
+     *
+     * @return float: somma dei volumi di tutti i pprodotti che compongono l'ordine
+     */
+   // public double volumeOrdine() {}
+        public  double  volumeOrdine() {
+            double sum = 0;
+            for (Prodotto p: this.mapProdotti.keySet())
+                sum +=( p.getVolume()*this.mapProdotti.get(p));
+            return sum;
+            }
+
+
+    /**
+     * cercaProdotto è un metodo a cui viene passato un prodotto, che restituisce un boolean
+     *
+     * @param p
+     * @return true se il prodotto è stato trovato false altrimenti
+     */
+    public boolean containsProdotto(Prodotto p) {
+        for (Prodotto prodotto : this.mapProdotti.keySet()) {
+            if (p.equals(prodotto)) return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * Aggiungi un prodotto all'ordine dei prodotti
+     *
+     * @param p
+     * @param quantita
+     */
+    public void aggiungiProdotto(Prodotto p, int quantita) {
+        this.getMapProdotti().put(p, quantita);
     }
 
 
-
-    /* public static void addProdotto (List<Prodotto> listaProdottiP, String miao) {
-        Prodotto ciccino = new Prodotti(miao,"NULL",0, CategorieProdotti.ALIMENTARI);
-        listaProdottiP.add(ciccino);
-        listaProdottiP.forEach(name -> System.out.println(name));
-    }
-
-    public void addProdotto2 (String miao) {
-        Prodotti ciccino = new Prodotti(miao);
-        listaProdotti.add(ciccino);
-        listaProdotti.forEach(name -> System.out.println("hai aggiunto" + " " + name.toString()));
-    }
-
-    public void stampList() {
-        listaProdotti.forEach((n) -> System.out.println(n));
-    }
-*/
 }

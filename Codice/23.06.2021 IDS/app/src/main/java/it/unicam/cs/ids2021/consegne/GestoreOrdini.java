@@ -1,52 +1,65 @@
 package it.unicam.cs.ids2021.consegne;
-
+import it.unicam.cs.ids2021.negozio.Prodotto;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+public class GestoreOrdini implements GestoreOrdiniI,OrdineCreator{
 
-public class GestoreOrdini implements GestoreOrdiniI {
     private Set<Ordine> setOrdine;
     private Set<Pacco> setPacco;
 
     //costruttore gestore ordini----------------------------------
-    GestoreOrdini(Set<Ordine> setOrdine){this.setPacco=setPacco;}
+    public GestoreOrdini(Set<Ordine> setOrdine) {
+        this.setOrdine = setOrdine;
+        this.setPacco = setPacco; }
+
+    //creaOrdine-------------------------------------------------
+    @Override
+    public Ordine creatOrdine(Map<Prodotto,Integer> mapProdotti) {
+        return new Ordini(mapProdotti);
+    }
+
+    //Altri metodi------------------------------------------------
     List<Dimensione> listaDim = new ArrayList<>();
 
-    List<Dimensione>  dimensionePacco (float d){
-        if(d<=10){listaDim.add(Dimensione.PICCOLO);}
-        if(d<=20){listaDim.add(Dimensione.MEDIO);}
-        if(d<=30){listaDim.add(Dimensione.GRANDE);}
-        else{ listaDim.add(Dimensione.GRANDE) ;
-            dimensionePacco(d-30);}
-        return listaDim;}
-
-    //void aggiungiProdotto (Pacco pacco,Prodotti prodotto) {}
-    void modificaDimensione (Pacchi pacco, String dimensione) {
-        if(dimensione.toUpperCase().equals(Dimensione.GRANDE.toString())||
-                dimensione.toUpperCase().equals(Dimensione.MEDIO.toString())||
-                dimensione.toUpperCase().equals(Dimensione.PICCOLO.toString())){
-            pacco.setDimensione(Dimensione.valueOf(dimensione.toUpperCase()));
+    /** Stabilisce le dimensioni ottimali dei pacchi
+     * @param d
+     * @return una lista di dimensioni dei pacchi
+     */
+    public List<Dimensione> dimensionePacco(double d) {
+        if (d < 30) {
+            if (d < 10) {
+                listaDim.add(Dimensione.PICCOLO);
+            }
+            if (d >= 10 && d < 20) {
+                listaDim.add(Dimensione.MEDIO);
+            }
+            if (d >= 20 && d < 30) {
+                listaDim.add(Dimensione.GRANDE);
+            }
+        } else {
+            listaDim.add(Dimensione.GRANDE);
+            dimensionePacco(d = d - 30);
         }
-    }
-    void modificaStato (Pacchi pacco,String stato) {
-        if(stato.toUpperCase().equals(StatoPacco.IN_PREPARAZIONE)||
-                stato.toUpperCase().equals(StatoPacco.RITIRATO)||
-                stato.toUpperCase().equals(StatoPacco.SPEDITO)){
-            pacco.setStato(StatoPacco.valueOf(stato.toUpperCase()));
-        }
+        return listaDim;
     }
 
     /**
-     *
-     * @param listaProdotti
-     * @return
+     * Aggiungi un prodotto
+     * @param p
+     * @param quantita
+     */
+    public void aggiungiProdotto(Ordine o,Prodotto p,int quantita) {
+        if(o.containsProdotto(p)==false){o.aggiungiProdotto(p,quantita);}
+            o.getMapProdotti().computeIfPresent(p, (k, v) -> v +=quantita);
+    }
 
-    Dimensione calcolaDimensione (List<Prodotti> listaProdotti) { //prende in input le dimesioni e calcola in che range è
-    if(listaProdotti.size()<=5)
-    return Dimensione.PICCOLO;
-    if(listaProdotti.size()>=20)
-    return Dimensione.GRANDE;
-    return  Dimensione.MEDIO;
-    }*/
+
+
+
+
+
 }
+

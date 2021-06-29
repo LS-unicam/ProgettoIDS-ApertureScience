@@ -4,5 +4,7 @@ public enum CategorieProdotti {
     ALIMENTARI,
     ELETTRONICA,
     VESTIARIO,
-    LIBRI
+    LIBRI,
+    GIOCHI,
+    ALTRO
 }
