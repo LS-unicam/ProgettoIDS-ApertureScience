@@ -7,12 +7,15 @@ public class Corrieri implements Impiegato{
     String cognome;
     String email;
     Set<Pacco> setPacchi;
+    StatoCorriere statoCorriere; // CREA GETTER E SETTER
+
 
     //Costruttore---------------------------------------------------
     public Corrieri (String nome, String cognome, String email){
         this.nome=nome;
         this.cognome=cognome;
         this.email=email;
+        this.statoCorriere= StatoCorriere.LIBERO;
     }
 
     //Getters and Setters-------------------------------------------
@@ -33,4 +36,18 @@ public class Corrieri implements Impiegato{
 
     @Override
     public void setEmail(String email) {this.email=email;}
+
+
+
+    public Set<Pacco> getSetPacchi() {
+        return setPacchi;
+    }
+
+    public void setSetPacchi(Set<Pacco> setPacchi) {
+        this.setPacchi = setPacchi;
+    }
+
+
 }
+
+

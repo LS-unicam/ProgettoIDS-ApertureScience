@@ -1,5 +1,7 @@
 package it.unicam.cs.ids2021.consegne;
 
+import java.util.Objects;
+
 public class Pacchi implements Pacco {
     private int id; //numero progressivo
     private String partenza; //negozio
@@ -12,6 +14,20 @@ public class Pacchi implements Pacco {
         this.destinazione = destinazione;
         this.stato = stato;
         this.dimensione = dimensione;
+    }
+
+    //Equals & HashCode--------------------------------------------------------------------
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pacchi pacchi = (Pacchi) o;
+        return id == pacchi.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public int getIdPacco() {

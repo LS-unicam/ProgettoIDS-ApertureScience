@@ -9,7 +9,7 @@ public class Negozi implements Negozio {
     private Posizione posizione;
     private Map <Prodotto,Integer> mapProdotti;
     private Set<CategorieProdotti> categorie;
-    private Set<Cassieri> setCassieri;
+
 
     //Costruttore----------------------------------------------
     public Negozi(String nome, Posizione posizione) {
@@ -17,7 +17,20 @@ public class Negozi implements Negozio {
         this.posizione = posizione;
         this.categorie = null;
         this.mapProdotti = new HashMap<>();
-        this.setCassieri = new HashSet<>();
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Negozi negozi = (Negozi) o;
+        return nome.equals(negozi.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
     }
 
     //Getters and Setters--------------------------------------
@@ -35,8 +48,50 @@ public class Negozi implements Negozio {
 
     public Set<CategorieProdotti> getSetCategorie() { return categorie; }
 
-    public Set<Cassieri> getSetCassieri() {
-        return setCassieri;
+
+    //altri metodi------------------------------------------------------
+
+    /**Ricarca in base al prodotto
+     * @param p
+     * @return true se è presente, False altrimenti
+     */
+    public boolean containsProdotto(Prodotto p) {
+        for (Prodotto prodotto : this.mapProdotti.keySet()) {
+            if (p.equals(prodotto)) return true;
+        }
+        return false;
+    }
+
+    /**Ricerca in base all'id del prodotto
+     * @param id
+     * @return Ritorna il prodotto cercato
+     * @throws IllegalArgumentException
+     */
+    public Prodotto containsProdotto(String id) throws IllegalArgumentException {
+        for (Prodotto prodotto : this.mapProdotti.keySet()) {
+            if (id.equals(prodotto.getId())) return prodotto;
+        }
+        throw new IllegalArgumentException("Il prodotto non è presente.");
+    }
+
+    /** Agginge un prodotto alla mappa di tutti i prodotti
+     * @param p
+     * @param q
+     */
+    public void aggiungiProdotto(Prodotto p, Integer q) {
+        if (!this.mapProdotti.containsKey(p)) {
+            this.mapProdotti.put(p, q);
+        }
+        this.mapProdotti.computeIfPresent(p, (k, v) -> v += q);
+    }
+
+    /**
+     * La quantita viene modificata in base al numero passato
+     * @param p
+     * @param q
+     */
+    public void setQuantita(Prodotto p, Integer q) {
+        this.mapProdotti.computeIfPresent(p, (k, v) -> v = q);
     }
 
 }
