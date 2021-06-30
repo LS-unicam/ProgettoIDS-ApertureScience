@@ -1,8 +1,10 @@
 package it.unicam.cs.ids2021.consegne;
-
 import it.unicam.cs.ids2021.negozio.Prodotto;
+import org.apache.commons.lang3.RandomStringUtils;
 
+import java.io.RandomAccessFile;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -17,8 +19,8 @@ public class Ordini implements Ordine {
     public Ordini(Map<Prodotto, Integer> mapProdotti) {
         this.mapProdotti = mapProdotti;
         this.data = LocalDate.now();
-        this.setPacchi = null;
-        this.idOrdine = null;
+        this.setPacchi = new HashSet<>();
+        this.idOrdine =  "";
     }
 
     //equals & hashcode----------------------------------------------------
@@ -66,14 +68,12 @@ public class Ordini implements Ordine {
      *
      * @return float: somma dei volumi di tutti i pprodotti che compongono l'ordine
      */
-   // public double volumeOrdine() {}
         public  double  volumeOrdine() {
             double sum = 0;
             for (Prodotto p: this.mapProdotti.keySet())
                 sum +=( p.getVolume()*this.mapProdotti.get(p));
             return sum;
             }
-
 
     /**
      * cercaProdotto è un metodo a cui viene passato un prodotto, che restituisce un boolean
@@ -86,7 +86,13 @@ public class Ordini implements Ordine {
             if (p.equals(prodotto)) return true;
         }
         return false;
+    }
 
+    public Prodotto containsProdotto(String id) throws IllegalArgumentException {
+        for (Prodotto prodotto : this.mapProdotti.keySet()) {
+            if (id.equals(prodotto.getId())) return prodotto;
+        }
+        throw new IllegalArgumentException("Il prodotto non è presente.");
     }
 
     /**
@@ -98,6 +104,7 @@ public class Ordini implements Ordine {
     public void aggiungiProdotto(Prodotto p, int quantita) {
         this.getMapProdotti().put(p, quantita);
     }
+
 
 
 }

@@ -1,69 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="521.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerCassiere">
+<AnchorPane prefHeight="517.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerCassiere">
    <children>
       <Label layoutX="30.0" layoutY="15.0" text="Cassiere" textFill="#0eb944">
          <font>
             <Font name="Bernard MT Condensed" size="17.0" />
          </font></Label>
-      <Button layoutX="668.0" layoutY="481.0" mnemonicParsing="false" onAction="#MenuPrincipaleScene" text="Menu Principale" />
       <Label layoutX="30.0" layoutY="53.0" />
-      <Label layoutX="27.0" layoutY="53.0" text="Lista Spesa" />
-      <TableView fx:id="tabellaProdotti" layoutX="14.0" layoutY="80.0" prefHeight="413.0" prefWidth="203.0">
-        <columns>
-          <TableColumn fx:id="colonnaProdotto" prefWidth="136.0000762939453" text="Prodotto" />
-          <TableColumn fx:id="colonnaQuantita" prefWidth="65.59991455078125" text="Quantità" />
-        </columns>
-      </TableView>
-      <HBox layoutX="252.0" layoutY="187.0" prefHeight="30.0" prefWidth="490.0" spacing="30.0">
+      <HBox layoutX="498.0" layoutY="461.0" spacing="10.0">
          <children>
-            <Button fx:id="buttonAggiungiProdotto" mnemonicParsing="false" onAction="#ActionAggiungiProdotto" prefHeight="30.0" prefWidth="130.0" text="Aggiungi Prodotto" />
-            <Button fx:id="buttonEliminaProdotto" mnemonicParsing="false" onAction="#ActionEliminaProdotto" prefHeight="30.0" prefWidth="130.0" text="EliminaProdotto" />
+            <Button fx:id="buttonMostraLocker" mnemonicParsing="false" onAction="#ActionMostraLocker" prefHeight="30.0" prefWidth="160.0" text="Mostra Locker Disponibili" />
+            <Button mnemonicParsing="false" onAction="#MenuPrincipaleScene" prefHeight="30.0" text="Menu Principale" />
          </children>
       </HBox>
-      <HBox layoutX="253.0" layoutY="24.0" prefHeight="30.0" prefWidth="490.0" spacing="30.0">
+      <VBox layoutX="21.0" layoutY="90.0" prefHeight="96.0" prefWidth="345.0" spacing="10.0">
          <children>
-            <Label prefWidth="100.0" text="Nome" />
-            <Label prefWidth="100.0" text="IdProdotto" />
-            <Label prefWidth="100.0" text="Prezzo" />
-            <Label prefWidth="100.0" text="Volume" />
+            <HBox prefHeight="22.0" prefWidth="339.0" spacing="40.0">
+               <children>
+                  <Label prefWidth="150.0" text=" Id Prodotto" />
+                  <Label prefWidth="150.0" text="Quantita" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="339.0" spacing="40.0">
+               <children>
+                  <TextField fx:id="textIdProdotto" prefHeight="30.0" />
+                  <TextField fx:id="textQuantita" prefHeight="30.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="339.0" spacing="40.0">
+               <children>
+                  <Button fx:id="buttonAggiungiProdotto" mnemonicParsing="false" onAction="#ActionAggiungiProdotto" prefHeight="30.0" prefWidth="150.0" text="Aggiungi Prodotto" />
+                  <Button fx:id="buttonEliminaProdotto" mnemonicParsing="false" onAction="#ActionEliminaProdotto" prefHeight="30.0" prefWidth="150.0" text="EliminaProdotto" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <HBox layoutX="253.0" layoutY="53.0" prefHeight="30.0" prefWidth="490.0" spacing="30.0">
+      </VBox>
+      <Button fx:id="buttonCreaOrdine" layoutX="21.0" layoutY="46.0" mnemonicParsing="false" onAction="#ActionCreaOrdine" prefHeight="30.0" prefWidth="208.0" text="Inizia un nuovo Ordine" />
+      <HBox layoutX="14.0" layoutY="200.0" spacing="40.0">
          <children>
-            <TextField fx:id="textNome" prefHeight="30.0" prefWidth="100.0" />
-            <TextField fx:id="textIdProdotto" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="100.0" />
-            <TextField fx:id="textPrezzo" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="100.0" />
-            <TextField fx:id="textVolume" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="100.0" />
+            <VBox prefHeight="300.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="200.0" text="Prodotti Negozio " />
+                  <TableView fx:id="tabellaNegozio" prefHeight="250.0" prefWidth="150.0">
+                    <columns>
+                        <TableColumn fx:id="colonnaIdProdottoN" prefWidth="75.0" text="IdProdotto" />
+                      <TableColumn fx:id="colonnaProdottoN" prefWidth="125.60003662109375" text="Prodotto" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox prefHeight="300.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="200.0" text="Prodotti spesa" />
+                  <TableView fx:id="tabellaSpesa" prefHeight="250.0" prefWidth="150.0">
+                    <columns>
+                      <TableColumn fx:id="colonnaProdottoSpesa" prefWidth="126.4000244140625" text="Prodotto" />
+                      <TableColumn fx:id="colonnaQuantitaSpesa" prefWidth="72.0" text="Quantità" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </HBox>
-      <HBox layoutX="252.0" layoutY="107.0" prefHeight="30.0" prefWidth="490.0" spacing="30.0">
-         <children>
-            <Label layoutX="10.0" layoutY="10.0" prefWidth="100.0" text="Quantità" />
-            <Label prefWidth="100.0" text="Categoria" />
-         </children>
-      </HBox>
-      <HBox layoutX="252.0" layoutY="137.0" prefHeight="30.0" prefWidth="490.0" spacing="30.0">
-         <children>
-            <TextField fx:id="textQuantita" prefHeight="30.0" prefWidth="100.0" />
-            <ComboBox fx:id="comboBoxCategoria" prefWidth="100.0" />
-         </children>
-      </HBox>
-      <HBox layoutX="253.0" layoutY="230.0" prefHeight="30.0" prefWidth="490.0" spacing="30.0">
-         <children>
-            <Button fx:id="buttonCreaOrdine" mnemonicParsing="false" onAction="#ActionCreaOrdine" prefHeight="30.0" prefWidth="130.0" text="CreaOridne" />
-            <Button fx:id="buttonMostraLocker" mnemonicParsing="false" onAction="#ActionMostraLocker" prefHeight="30.0" prefWidth="180.0" text="Mostra Locker Disponibili" />
-         </children>
-      </HBox>
+      <Button fx:id="buttonScegliOrdine" layoutX="401.0" layoutY="46.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="194.0" text="Scegli un ordine esistente" />
+      <TextField fx:id="textIdOrdine" layoutX="619.0" layoutY="46.0" prefHeight="30.0" prefWidth="150.0" />
+      <Label layoutX="402.0" layoutY="18.0" prefHeight="18.0" prefWidth="366.0" text="Inserisci l'id dell'ordine su cui operare:" />
    </children>
 </AnchorPane>

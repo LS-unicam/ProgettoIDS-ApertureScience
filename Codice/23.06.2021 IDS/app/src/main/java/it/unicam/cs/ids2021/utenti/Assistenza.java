@@ -1,6 +1,6 @@
 package it.unicam.cs.ids2021.utenti;
 
-public class Assistenza implements Impiegato {
+public class Assistenza implements AssistenzaI {
     String nome;
     String cognome;
     String email;

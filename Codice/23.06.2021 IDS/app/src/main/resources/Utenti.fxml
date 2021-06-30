@@ -1,22 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/14"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerUtenti">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerUtenti">
    <children>
-      <ButtonBar layoutX="89.0" layoutY="86.0" prefHeight="40.0" prefWidth="200.0" />
-      <ButtonBar layoutX="113.0" layoutY="46.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="112.0" layoutY="127.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button fx:id="buttonCassiere" mnemonicParsing="false" onAction="#CassiereScene" text="Cassiere" />
             <Button fx:id="buttonCorriere" mnemonicParsing="false" onAction="#CorriereScene" text="Corriere" />
-          <Button fx:id="buttonAssiestenza" mnemonicParsing="false" onAction="#AssistenzaScene" text="Assistenza" />
+          <Button fx:id="buttonAssistenza" mnemonicParsing="false" onAction="#AssistenzaScene" text="Assistenza" />
             <Button fx:id="buttonCliente" mnemonicParsing="false" onAction="#ClienteScene" text="Cliente" />
         </buttons>
       </ButtonBar>
+      <HBox layoutX="167.0" layoutY="248.0" prefHeight="119.0" prefWidth="266.0">
+         <children>
+            <VBox spacing="20.0">
+               <children>
+                  <Label text="Nome" />
+                  <Label text="Cognome" />
+                  <Label layoutX="10.0" layoutY="20.0" text="Email" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="119.0" prefWidth="175.0" spacing="10.0">
+               <padding>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <TextField fx:id="textNome" />
+                  <TextField fx:id="textCognome" layoutX="10.0" layoutY="20.0" />
+                  <TextField fx:id="textEmail" layoutX="10.0" layoutY="20.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="buttonEntra" layoutX="244.0" layoutY="200.0" mnemonicParsing="false" onAction="#ActionEntra" text="Entra" />
+      <Button fx:id="buttonRegistrati" layoutX="309.0" layoutY="200.0" mnemonicParsing="false" onAction="#ActionRegistrati" text="Registrati" />
+      <ListView fx:id="listViewNegozi" layoutX="410.0" layoutY="184.0" prefHeight="200.0" prefWidth="175.0" />
    </children>
 </AnchorPane>
