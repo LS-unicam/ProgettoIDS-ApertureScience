@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73c95cc7-8373-43d2-b4ca-b0cd7034f253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/23.06.2021 IDS/app/src/main/java/it/unicam/cs/ids2021/DB/DBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Progetto VP/ProgettoIDSC3.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto VP/ProgettoIDSC3.vpp" afterDir="false" />
     </list>
@@ -63,7 +64,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RunManager">
     <configuration name="JavaFX" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -94,6 +95,8 @@
       <option name="presentableId" value="Default" />
       <updated>1624979262685</updated>
       <workItem from="1625306811667" duration="2216000" />
+      <workItem from="1625576860479" duration="584000" />
+      <workItem from="1625577531866" duration="669000" />
     </task>
     <servers />
   </component>
