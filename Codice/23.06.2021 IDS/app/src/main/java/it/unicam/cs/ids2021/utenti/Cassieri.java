@@ -1,4 +1,5 @@
 package it.unicam.cs.ids2021.utenti;
+import it.unicam.cs.ids2021.negozio.Negozi;
 import it.unicam.cs.ids2021.negozio.Negozio;
 
 public class Cassieri implements Cassiere {
@@ -31,4 +32,7 @@ public class Cassieri implements Cassiere {
 
     @Override
     public Negozio getNegozio() { return negozio; }
+
+    public void setNegozio(Negozio n) {this.negozio=n;}
+
 }

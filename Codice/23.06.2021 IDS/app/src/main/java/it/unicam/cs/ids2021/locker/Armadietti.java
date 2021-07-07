@@ -4,6 +4,11 @@ import java.util.Objects;
 
 public class Armadietti implements Armadietto {
     private String id;
+    private int password;
+    private boolean bloccato;
+    private boolean vuoto;
+    private boolean funzionante;
+    private Dimensione dimensioneArmadietto;
 
     @Override
     public boolean equals(Object o) {
@@ -17,12 +22,6 @@ public class Armadietti implements Armadietto {
     public int hashCode() {
         return Objects.hash(id);
     }
-
-    private int password;
-    private boolean bloccato;
-    private boolean vuoto;
-    private boolean funzionante;
-    private Dimensione dimensioneArmadietto;
 
     public Armadietti(String id, Dimensione dimensioneArmadietto) {
         this.id = id;

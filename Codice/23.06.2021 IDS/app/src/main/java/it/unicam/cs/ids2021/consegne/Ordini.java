@@ -1,5 +1,6 @@
 package it.unicam.cs.ids2021.consegne;
 import it.unicam.cs.ids2021.negozio.Prodotto;
+import javafx.fxml.Initializable;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.io.RandomAccessFile;
@@ -20,7 +21,7 @@ public class Ordini implements Ordine {
         this.mapProdotti = mapProdotti;
         this.data = LocalDate.now();
         this.setPacchi = new HashSet<>();
-        this.idOrdine =  "";
+        this.idOrdine = "";
     }
 
     //equals & hashcode----------------------------------------------------
@@ -88,9 +89,16 @@ public class Ordini implements Ordine {
         return false;
     }
 
-    public Prodotto containsProdotto(String id) throws IllegalArgumentException {
+    public Prodotto cercaProdotto(String id) throws IllegalArgumentException {
         for (Prodotto prodotto : this.mapProdotti.keySet()) {
             if (id.equals(prodotto.getId())) return prodotto;
+        }
+        throw new IllegalArgumentException("Il prodotto non è presente.");
+    }
+
+    public Prodotto cercaProdottoN(String nome) throws IllegalArgumentException {
+        for (Prodotto prodotto : this.mapProdotti.keySet()) {
+            if (nome.equals(prodotto.getNome())) return prodotto;
         }
         throw new IllegalArgumentException("Il prodotto non è presente.");
     }
@@ -105,6 +113,9 @@ public class Ordini implements Ordine {
         this.getMapProdotti().put(p, quantita);
     }
 
+    public Integer quantitaValue(Prodotto p)throws IllegalArgumentException{
+        if(containsProdotto(p)==true) { return this.mapProdotti.get(p); }
+    else throw new IllegalArgumentException("Il prodotto non è presente all'interno dell'ordine");}
 
 
 }

@@ -2,7 +2,7 @@ package it.unicam.cs.ids2021.utenti;
 import it.unicam.cs.ids2021.consegne.Pacco;
 import java.util.Set;
 
-public class Corrieri implements Impiegato{
+public class Corrieri implements Corriere{
     String nome;
     String cognome;
     String email;
@@ -37,8 +37,6 @@ public class Corrieri implements Impiegato{
     @Override
     public void setEmail(String email) {this.email=email;}
 
-
-
     public Set<Pacco> getSetPacchi() {
         return setPacchi;
     }
@@ -47,6 +45,9 @@ public class Corrieri implements Impiegato{
         this.setPacchi = setPacchi;
     }
 
+    public StatoCorriere getStatoCorriere() { return statoCorriere; }
+
+    public void setStatoCorriere(StatoCorriere statoCorriere) {this.statoCorriere = statoCorriere; }
 
 }
 

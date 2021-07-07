@@ -6,6 +6,7 @@ public interface Armadietto {
 
     public String getId();
     public void setPassword(int password);
+    public int getPassword();
     public boolean isBloccato();
     public boolean isVuoto();
     public Dimensione getDimensione();

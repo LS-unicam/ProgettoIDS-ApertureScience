@@ -8,6 +8,7 @@ public class Prodotti implements Prodotto {
     private CategorieProdotti categoria;
     private double volume;
 
+
     // costruttore------------------------------------------------------------------------------------------
     public Prodotti(String id, String nome, double prezzo, CategorieProdotti categoria,double volume) {
         this.id = id;

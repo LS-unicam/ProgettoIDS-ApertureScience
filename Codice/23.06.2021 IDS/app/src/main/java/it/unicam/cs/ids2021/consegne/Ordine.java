@@ -8,5 +8,9 @@ public interface Ordine {
     public void setIdOrdine(String idOrdine);
     public double volumeOrdine();
     public boolean containsProdotto(Prodotto p);
+    public Prodotto cercaProdotto(String id);
+    public Prodotto cercaProdottoN(String nome);
     public void aggiungiProdotto(Prodotto p, int quantita);
+    public Integer quantitaValue(Prodotto p);
+
 }

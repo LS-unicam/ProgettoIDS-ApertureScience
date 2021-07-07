@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerUtenti">
+<AnchorPane prefHeight="528.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerUtenti">
    <children>
-      <ButtonBar layoutX="112.0" layoutY="127.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="14.0" layoutY="264.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button fx:id="buttonCassiere" mnemonicParsing="false" onAction="#CassiereScene" text="Cassiere" />
             <Button fx:id="buttonCorriere" mnemonicParsing="false" onAction="#CorriereScene" text="Corriere" />
@@ -20,7 +20,7 @@
             <Button fx:id="buttonCliente" mnemonicParsing="false" onAction="#ClienteScene" text="Cliente" />
         </buttons>
       </ButtonBar>
-      <HBox layoutX="167.0" layoutY="248.0" prefHeight="119.0" prefWidth="266.0">
+      <HBox layoutX="37.0" layoutY="89.0" prefHeight="119.0" prefWidth="266.0">
          <children>
             <VBox spacing="20.0">
                <children>
@@ -44,8 +44,10 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="buttonEntra" layoutX="244.0" layoutY="200.0" mnemonicParsing="false" onAction="#ActionEntra" text="Entra" />
-      <Button fx:id="buttonRegistrati" layoutX="309.0" layoutY="200.0" mnemonicParsing="false" onAction="#ActionRegistrati" text="Registrati" />
-      <ListView fx:id="listViewNegozi" layoutX="410.0" layoutY="184.0" prefHeight="200.0" prefWidth="175.0" />
+      <Button fx:id="buttonEntra" layoutX="547.0" layoutY="470.0" mnemonicParsing="false" onAction="#ActionEntra" text="Entra" />
+      <Button fx:id="buttonRegistrati" layoutX="622.0" layoutY="470.0" mnemonicParsing="false" onAction="#ActionRegistrati" text="Registrati" />
+      <ListView fx:id="listViewNegozi" layoutX="23.0" layoutY="357.0" prefHeight="138.0" prefWidth="233.0" />
+      <Label layoutX="26.0" layoutY="54.0" prefHeight="18.0" prefWidth="241.0" text="Inserire Il propri dati : " />
+      <Label layoutX="35.0" layoutY="225.0" prefHeight="18.0" prefWidth="198.0" text="Scegli la tua categoria :" />
    </children>
 </AnchorPane>

@@ -1,98 +1,75 @@
 package it.unicam.cs.ids2021.view;
 
+import com.google.common.net.UrlEscapers;
 import it.unicam.cs.ids2021.JavaFX;
-import it.unicam.cs.ids2021.consegne.GestoreOrdini;
 import it.unicam.cs.ids2021.consegne.GestoreOrdiniI;
 import it.unicam.cs.ids2021.consegne.Ordine;
-import it.unicam.cs.ids2021.consegne.Ordini;
-import it.unicam.cs.ids2021.locker.GestoreLocker;
 import it.unicam.cs.ids2021.locker.GestoreLockerI;
+import it.unicam.cs.ids2021.negozio.Negozio;
 import it.unicam.cs.ids2021.negozio.Prodotto;
+import it.unicam.cs.ids2021.utenti.Cassiere;
 import it.unicam.cs.ids2021.utenti.Utente;
-import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.checkerframework.framework.qual.SubtypeOf;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Collection;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.ResourceBundle;
 
-public class JavaFXControllerCassiere {
+public class JavaFXControllerCassiere implements Initializable {
 
+    Ordine o;
+    private Cassiere selectedCassiere;
     GestoreOrdiniI gO = JavaFX.gOrdini;
     GestoreLockerI gL = JavaFX.gLocker;
 
     //BOTTONI---------------------------------------------------------
     @FXML
     private Button buttonMostraLocker;
-
     @FXML
     private Button buttonAggiungiProdotto;
-
     @FXML
     private Button buttonEliminaProdotto;
-
     @FXML
     private Button buttonCreaOrdine;
-
+    @FXML
+    private Button buttonEliminaOrdine;
     @FXML
     private Button buttonScegliOrdine;
-
     //TEXT FIELD----------------------------------------------------------------------
     @FXML
     private TextField textIdProdotto;
-
     @FXML
     private TextField textQuantita;
-
     @FXML
     private TextField textIdOrdine;
-
-    //TABELLA NEGOZIO-----------------------------------------------------------------------
+    // LABEL -------------------------------------------------------------------------------
     @FXML
-    private TableView<Map<Prodotto, Integer>> tabellaNegozio;
-
+    private Label nomeLabel;
     @FXML
-    private TableColumn<Map<Prodotto, Integer>, String> colonnaIdProdottoN;
-
+    private Label cognomeLabel;
     @FXML
-    private TableColumn<Map<Prodotto, Integer>, String> colonnaProdottoN;
+    private Label negozioLabel;
+    
+    //METODI--------------------------------------------------------------------------------
 
-    //TABELLA SPESA---------------------------------------------------------------------
-
-    @FXML
-    private TableView<Map<Prodotto, Integer>> tabellaSpesa;
-
-    @FXML
-    private TableColumn<Map<Prodotto, Integer>, String> colonnaProdottoSpesa;
-
-    @FXML
-    private TableColumn<Map<Prodotto, Integer>, Integer> colonnaQuantitaSpesa;
-
-
-    // Metodi----------------------------------------------------------------------------
-
-
-    @FXML
-    void ActionAggiungiProdotto(ActionEvent event) {
-     //   ricavaOrdine().getMapProdotti().put()
+    private void alertError(String headerText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("STAI SBAGLIANDO");
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
     }
+
+    @FXML
+    void ActionAggiungiProdotto(ActionEvent event) { }
 
     /**
      * Crea una mappa di prodotti
@@ -104,17 +81,28 @@ public class JavaFXControllerCassiere {
         //  mappa.put();
         return mappa;
     }*/
-
     @FXML
     void ActionCreaOrdine(ActionEvent event) {
-        Ordine o = new Ordini(new HashMap<Prodotto, Integer>());
-        o.setIdOrdine(gO.generaId());
-        gO.aggiungiOrdine(o);
+        o= gO.creaOrdine(new HashMap<Prodotto, Integer>());
         textIdOrdine.setText(o.getIdOrdine());
+    }
+    @FXML
+    void ActionEliminaOrdine(ActionEvent event) {
+        if(!gO.containsOrdine(textIdOrdine.getText())) alertError("L'ordine che si vuole eliminare non è presente.");
+        gO.eliminaOrdine(textIdOrdine.getText());
+    }
+
+    @FXML
+    void ActionScegliOrdine(ActionEvent event) {
+       if(!gO.containsOrdine(textIdOrdine.getText()))
+           alertError("L'id da lei inserito non corrisponde a nessun ordine.");
+        else o= gO.cercaOrdine(textIdOrdine.getText());
+
     }
 
     @FXML
     void ActionEliminaProdotto(ActionEvent event) {
+        gO.eliminaProdotto(gO.cercaOrdine(textIdOrdine.getText()),textIdProdotto.getText());
     }
 
     @FXML
@@ -133,80 +121,20 @@ public class JavaFXControllerCassiere {
 
 //INITIALIZE----------------------------------------------------------------------------------------------------------
 
-    private Ordine ricavaOrdine(){
+    public void initData(Cassiere cassiere) {
+        selectedCassiere = cassiere;
+        nomeLabel.setText(selectedCassiere.getNome());
+        cognomeLabel.setText(selectedCassiere.getCognome());
+        negozioLabel.setText(selectedCassiere.getNegozio().getNome());
+    }
+
+    private Ordine ricavaOrdine() {
         return gO.cercaOrdine(textIdOrdine.getText());
     }
 
-    private ObservableList<String> getNomeProdotto() {
-        ObservableList<String> lista = FXCollections.observableArrayList();
-        for (Prodotto p : ricavaOrdine().getMapProdotti().keySet()) {
-            lista.add(p.getNome());
-        }
-        return lista;
+    @FXML
+    public void initialize(URL url, ResourceBundle rb) {
     }
-
-    public void initialize() {
-
-        //inizializza tabella Negozio----------------------------------------------
-        colonnaProdottoN.setCellValueFactory(new PropertyValueFactory<Map<Prodotto, Integer>, String>("nomeProdotto"));
-        colonnaIdProdottoN.setCellValueFactory(new PropertyValueFactory<Map<Prodotto, Integer>, String>("nomeProdotto"));
-        //inizializza tabella Spesa------------------------------------------------
-        colonnaProdottoSpesa.setCellValueFactory(new PropertyValueFactory<Map<Prodotto, Integer>, String>("nomeProdotto"));
-        colonnaQuantitaSpesa.setCellValueFactory(new PropertyValueFactory<Map<Prodotto, Integer>, Integer>("nomeProdotto"));
-
-        //bottoni----------------------
-
-
-        /* tabellaNegozio.setItems();
-        colonnaDescrizione.setCellValueFactory(new PropertyValueFactory<Movimento, String>("descrizione"));
-        colonnaUtente.setCellValueFactory(new PropertyValueFactory<Movimento, String>("utente"));
-        colonnaMovimentoId.setCellValueFactory(new PropertyValueFactory<Movimento, String>("idMovimento"));
-        colonnaListaTag.setCellValueFactory(new PropertyValueFactory<Movimento, String>("listaTag"));
-        colonnaImporto.setCellValueFactory(new PropertyValueFactory<Movimento, Double>("importo"));
-        colonnaUscita.setCellValueFactory(cell -> {
-            String a;
-            if (!cell.getValue().getUscita()) {
-                a = "Uscita";
-            } else a = "Entrata";
-            return new SimpleStringProperty(a);
-        });
-        colonnaData.setCellValueFactory(new PropertyValueFactory<Movimento, LocalDate>("data"));
-        tabellaMovimento.setItems(getlistaMovimento());
-        data.setValue(LocalDate.now());
-        listViewTag.getItems().setAll(getlistaTag());
-        listViewTag.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        comboBoxUscita.getItems().setAll(getlistaUscita());
-        comboBoxListaConto.getItems().setAll(getlistaConto());
-
-
-        tabellaMovimento.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            //Una volta selezionato un elemento della tabella i campi si riempiono secondo i paramentri dell'elemento selezionato
-
-            @Override
-            public void handle(MouseEvent event) {
-                if (tabellaMovimento.getSelectionModel().getSelectedItem() != null) {
-                    comboBoxListaConto.getSelectionModel().clearSelection();
-                    listViewTag.getSelectionModel().clearSelection();
-                    Movimento selectedMovimento = tabellaMovimento.getSelectionModel().getSelectedItem();
-                    if (!selectedMovimento.getUscita()) {
-                        comboBoxUscita.getSelectionModel().select("Uscita");
-                    } else {
-                        comboBoxUscita.getSelectionModel().select("Entrata");
-                    }
-                    comboBoxListaConto.getSelectionModel().select((controller.c.c.contoDiUnMovimento(selectedMovimento.getIdMovimento())).getNome());
-                    descrizione.setText(selectedMovimento.getDescrizione());
-                    utente.setText(selectedMovimento.getUtente());
-                    idMovimento.setText(selectedMovimento.getIdMovimento());
-                    idMovimentoDaModificare.setText(selectedMovimento.getIdMovimento());
-                    importoS.setText(String.valueOf(selectedMovimento.getImporto()));
-                    data.setValue(selectedMovimento.getData());
-                    for (int i = 0; i < selectedMovimento.getListaTag().size(); i++) {
-                        listViewTag.getSelectionModel().select(selectedMovimento.getListaTag().get(i).toString());
-                    }
-
-                }
-            }
-        });*/
-    }
-
 }
+
+

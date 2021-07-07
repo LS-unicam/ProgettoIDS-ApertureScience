@@ -2,13 +2,32 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/14"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerCliente">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.ids2021.view.JavaFXControllerCliente">
    <children>
-      <Label layoutX="30.0" layoutY="15.0" text="Cliente" textFill="#03bef2" />
+      <Label layoutX="30.0" layoutY="15.0" text="Cliente" textFill="#03bef2">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="20.0" />
+         </font></Label>
+      <GridPane layoutX="21.0" layoutY="64.0" prefHeight="78.0" prefWidth="294.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Cognome" GridPane.rowIndex="1" />
+            <Label layoutX="10.0" layoutY="77.0" text="Nome" />
+            <Label fx:id="cognomeLabel" layoutX="110.0" layoutY="16.0" prefHeight="18.0" prefWidth="143.0" text="cognome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="nomeLabel" prefHeight="18.0" prefWidth="138.0" text="nome" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
